@@ -71,6 +71,9 @@ __toc = streambook.TOCSidebar()"""
 footer = """
 __toc.generate()"""
 
+def _escape_text(text):
+    return text.replace("'", "\\'")
+
 
 class Generator:
     def __init__(self, section_filter=None):
@@ -91,7 +94,7 @@ class Generator:
         print(
             "\n".join(
                 [
-                    "__toc._add(" + levels[level] + "('" + text + "'))"
+                    "__toc._add(" + levels[level] + "('" + _escape_text(text) + "'))"
                     for text, level in gen.headers
                 ]
             ),
